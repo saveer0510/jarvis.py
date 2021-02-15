@@ -15,7 +15,11 @@ print("Today's date:", today)
 listner= sr.Recognizer()
 engine =pyttsx3.init()
 voices = engine.getProperty('voices')
+
 engine.setProperty('voice', voices[0].id)
+engine.setProperty('rate',170)
+engine.setProperty('volume',13)
+engine.setProperty('pitch',0)
 
 engine.say('i am jarvis')
 engine.runAndWait()
@@ -40,7 +44,10 @@ def war():
     hour = int(datetime.datetime.now().hour)
     if 21<=hour:
         talk('boss go to sleep')
+
+
 def dat():
+
  try:
     with sr.Microphone() as source:
 
@@ -117,9 +124,26 @@ def take():
 
  return command
 
+def inputt():
+    c=input("what is yor command")
+    return c
+
+
+
 def run():
+    def ask():
+        talk('how will you give comand text or voice')
+        n = input('how will you give comand text/voice')
+
+        if n == "voice":
+            comm = take()
+        elif n=='text' :
+            comm= inputt()
+        else:
+            ask()
+        return comm
     war()
-    com=take()
+    com=ask()
     if 'play' in com:
         song = com.replace('play','')
         print('playing'+song)
